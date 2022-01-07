@@ -2,7 +2,6 @@ import pandas as pd
 import streamlit as st
 import pickle
 import requests
-import gzip
 from PIL import Image
 
 favicon = Image.open("favicon.ico")
@@ -112,11 +111,9 @@ def recommend(movie_title):
 movies_dict = pickle.load(open("movies_dict.pkl", "rb"))
 movies = pd.DataFrame(movies_dict)
 
-similarity = ''
+f = open('similarity.pkl', 'rb')
 
-with gzip.open('similarity.pkl', 'rb') as ifp:
-    similarity = pickle.load(ifp)
-
+similarity = pickle.load(f)
 
 
 heading = '<h1 style="color:cyan;">Browse Movies</h1>'
